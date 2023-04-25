@@ -4,8 +4,9 @@ import style from './inputAdd.module.scss';
 
 export const InputAdd = ({ text, setText, tasks, setTasks }) => {
   const addTasks = () => {
-    setTasks([{ text, id: Date.now(), isCompleted: false }, ...tasks]);
-    setText('');
+    if(text.trim() && text.length )
+      setTasks([{ text, id: Date.now(), isCompleted: false }, ...tasks]);
+      setText('');
   };
   const handleText = (e) => {
     setText(e.target.value);
@@ -22,7 +23,7 @@ export const InputAdd = ({ text, setText, tasks, setTasks }) => {
           onChange={handleText}
           value={text}
         />
-        <button onClick={text ? addTasks : null} className={style.button}>
+        <button onClick={addTasks} className={style.button}>
           ADD
         </button>
       </div>

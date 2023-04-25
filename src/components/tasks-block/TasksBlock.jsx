@@ -15,7 +15,7 @@ export const TasksBlock = ({ tasks, setTasks }) => {
     <>
 
       <AnimatePresence initial='true'>
-        {tasks.map((task, i) => (
+        {tasks.map((task) => (
           <motion.section
             // whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 1.1 }}
