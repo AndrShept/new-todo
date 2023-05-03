@@ -1,14 +1,26 @@
-import React from 'react';
+import React ,{ChangeEvent} from 'react';
 import style from './inputAdd.module.scss';
-// import { TasksBlock } from '../tasks-block/TasksBlock';
 
-export const InputAdd = ({ text, setText, tasks, setTasks }) => {
+type TasksProps = {
+  text: string;
+  id: number;
+  isCompleted: boolean
+
+}
+interface InputAddProps {
+  text: string
+  setText: (text:string)=> void
+  tasks:TasksProps[];
+  setTasks: (arr:TasksProps[]) => void;
+}
+
+export const InputAdd:React.FC<InputAddProps> = ({ text, setText, tasks, setTasks }) => {
   const addTasks = () => {
-    if(text.trim() && text.length )
+    if(text.trim().length )
       setTasks([{ text, id: Date.now(), isCompleted: false }, ...tasks]);
       setText('');
   };
-  const handleText = (e) => {
+  const handleText = (e:ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
 
@@ -27,6 +39,7 @@ export const InputAdd = ({ text, setText, tasks, setTasks }) => {
           ADD
         </button>
       </div>
+     
     </section>
   );
 };

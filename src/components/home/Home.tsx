@@ -4,7 +4,7 @@ import { TasksBlock } from '../tasks-block/TasksBlock';
 
 export const Home = () => {
   const [text, setText] = React.useState('');
-  const [tasks, setTasks] = React.useState(JSON.parse(localStorage.getItem('tasks')) ||[]) 
+  const [tasks, setTasks] = React.useState(JSON.parse(localStorage.getItem('tasks')as string) ||[]) 
 
   React.useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));

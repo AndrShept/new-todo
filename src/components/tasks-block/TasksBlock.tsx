@@ -3,18 +3,31 @@ import { IoMdClose } from 'react-icons/io';
 import { FiEdit3 } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import style from './tasksBlock.module.scss';
+import cn from 'classnames';
 
-export const TasksBlock = ({ tasks, setTasks }) => {
-  const handleEdit = (e) => {
-    console.log(e.target.value);
+type TasksProps = {
+  text: string;
+  id: number;
+  isCompleted: boolean;
+};
+interface TasksBlockProps {
+  tasks: TasksProps[];
+  setTasks: (arr: TasksProps[]) => void;
+}
+
+export const TasksBlock: React.FC<TasksBlockProps> = ({ tasks, setTasks }) => {
+  const handleEdit = () => {};
+  const handleCompleted = (id: number) => {
+    const copyArr = [...tasks];
+    const current = copyArr.find((item) => item.id === id);
+    current!.isCompleted = !current!.isCompleted;
+    setTasks(copyArr);
+    
   };
-  console.log(tasks);
 
   return (
-
     <>
-
-      <AnimatePresence initial='true'>
+      <AnimatePresence initial={false}>
         {tasks.map((task) => (
           <motion.section
             // whileHover={{ scale: 1.2 }}
@@ -24,8 +37,9 @@ export const TasksBlock = ({ tasks, setTasks }) => {
             exit={{ y: -10, opacity: 0 }}
             transition={{ duration: 0.2 }}
             key={task.id}
+            onClick={() => handleCompleted(task.id)}
             // timeout={500}
-            className={style.container}
+            className={cn(task.isCompleted ? style.completed : style.container)}
           >
             <div className={style.task}>
               <p className={style.text}>{task.text}</p>
@@ -38,7 +52,8 @@ export const TasksBlock = ({ tasks, setTasks }) => {
               <IoMdClose
                 cursor='pointer'
                 size={30}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   setTasks(tasks.filter((item) => task.id !== item.id));
                 }}
                 className={style.deleteBtn}

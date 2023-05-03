@@ -1,9 +1,7 @@
 .container {
   cursor: pointer;
+  border-radius: 6px;
   margin-top: 20px;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
   background-color: rgb(135, 141, 141);
   &:hover {
     background-color: darken(rgb(135, 141, 141), 10%);
@@ -15,12 +13,10 @@
   grid-template-columns: 1fr 30px 30px;
   align-items: center;
   padding: 0 10px;
-
-  // justify-content: space-between;
+  
 }
 
-.text {
-}
+
 
 .editBtn {
   &:hover {
@@ -34,4 +30,15 @@
     fill: darken(rgb(152, 67, 231), 10%);
     transition: 0.1s;
   }
+}
+
+.completed{
+  cursor: pointer;
+  border-radius: 6px;
+  margin-top: 20px;
+  text-decoration-line: line-through;
+  // background-image: linear-gradient( 110.1deg,  rgba(34,126,34,1) 2.9%, rgb(137, 204, 50) 90.3% );
+
+background: linear-gradient(to right, #237A57, #11584a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
